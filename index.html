@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>projet dataviz</title>
+    <link rel="stylesheet" href="style.css">
+     <!-- Icone de l'onglet : ajout logo HP  -->
+     <link rel="shortcut icon" href="logo-hp.png"> 
+</head>
+<body>
+    <header id="top">
+        <h1>PERSONNAGES HARRY POTTER</h1>
+    </header>
+
+    <main>
+        <div class="flexbox1">
+            <ul>
+                <li><!-- BARRE DE RECHERCHE -->
+                    <form>
+                        <!-- <div> -->
+                            <label for="characterInput"></label>
+                            <input type="text" id="characterInput" placeholder="Entrez le nom du personnage">
+                            <!-- <button onclick="request()">:loupe_droite:</button> -->
+                            <button id ="recherche">🔎</button>
+                        <!-- </div> -->
+                    </form></li>
+                <li>
+                     <!-- FICHES PERSONNAGES -->
+            <div class="fichePersonnage">
+                <img id="image" src="" alt=""/><br>
+                <h2 id="name"></h2>
+                <p id="house"></p>
+                <p id="genre"></p>
+                <p id="espece"></p>
+            </div>
+                </li>
+            </ul>
+        </div>
+
+        <!-- GRAPHIQUES -->
+        <div class="flexbox2">
+            <ul>
+                <li><canvas id="myChart"></canvas></li>
+                <li><canvas id="myChart1"></canvas></li>
+            </ul>
+        </div>
+
+        <!-- GRID - Boite 4 -->
+        <div class="grid">
+            <h3>Liste des personnages</h3>
+            <br>
+            <ul id="post-list"></ul>
+            </div>
+
+        <!-- LECTEUR AUDIO -->
+        <section>
+            <audio controls>
+                <!-- Indiquer le chemin ou l'URL du fichier audio -->
+                <source src="musique1.mp3" type="audio/mp3">
+                Votre navigateur ne supporte pas l'élément audio.
+            </audio>
+        </section>
+    </main>
+   
+    <footer>
+        <!-- BOUTON RETOUR VERS LE HAUT -->
+        <div class="scroll-to-top">
+            <a href="#top"><img src="icons8-scroll-up-50.png" alt="Retourner en haut" /></a>
+        </div>
+    </footer>
+    
+   
+   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,209 @@
+main {
+    min-height: 500px;
+    width: 90%;
+    margin: 0 auto; 
+    padding: 15px;
+}
+
+body {
+    background: url('3.png') no-repeat center center fixed;
+    background-size: cover;
+    /* font-family: ; */
+    color: #fff4e2;
+}
+h1 {
+    text-align: center;
+}
+h2 {
+    color: white;
+    text-align: center;
+}
+.hide-summary {
+    display: none;
+}
+
+
+.flexbox1, .flexbox2, .grid {
+    /* border: 2px solid rgb(255, 235, 192);
+    border-radius: 10px; */
+    padding: 10px;
+    margin-top: 20px;
+}
+
+/* FLEXBOX1 - Boite 1 */
+.flexbox1 {
+    padding: 0;
+    margin-top: 150px;
+    width: 100%;
+    height: 650px;
+    /* border: 1px red solid; */
+    display: flex;
+    /* justify-content: space-around; */
+    justify-content: center;
+    align-items: center;
+}
+
+
+/* BARRE DE RECHERCHE */
+label[for="characterInput"] {
+    display: block;
+    margin-bottom: 10px; 
+}
+
+label[for="characterInput"] {
+    font-size: 18px;
+    /* color:white */
+}
+
+#characterInput {
+    margin: 5px;
+    padding: 10px;
+    font-size: 15px;
+    width: 200px;
+    border: 3px solid rgb(38, 75, 63);
+    border-radius: 50px;
+    background-color: rgba(255, 255, 255, 0.783);
+    text-align: center;
+    box-shadow: 0px 0px 20px 6px #0b0c0ca2;
+    transition: 0.2s;
+}
+#characterInput:hover {
+    border: 6px solid rgb(43, 80, 68);
+}
+
+button {
+    padding: 10px;
+    width: 80px; 
+    height: 60px; 
+    border: 3px solid rgb(38, 75, 63);
+    border-radius: 50px;
+    background-color: rgba(255, 255, 255, 0.623);
+    cursor: pointer;
+    transition: 0.2s;
+    text-align: center;
+    box-shadow: 0px 0px 20px 6px #0b0c0ca2;
+}
+button:hover {
+    background-color:rgb(8, 150, 103);
+    border: 5px solid rgba(0, 0, 0, 0.509);
+}
+
+/* GRAPHIQUES */
+/* .flexbox1 { */
+    /* border: 2px solid white;
+    border-radius: 10px; */
+    /* padding: 10px;
+    margin-top: 20px;
+} */
+
+.flexbox1 ul {
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+}
+.flexbox1 li {
+    list-style: none;
+    height: 180px;
+    width: 300px;
+    margin: 10px;
+    /* background-color: rgba(255, 255, 255, 0.42); */
+    display: flex;
+    justify-content: center;
+}
+
+
+
+/* GRAPHIQUES */
+.flexbox2 {
+    /* border: 2px solid white; */
+    /*border-radius: 10px; */
+    padding: 10px;
+    margin-top: 20px;
+}
+
+.flexbox2 ul {
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+}
+.flexbox2 li {
+    list-style: none;
+    height: 350px;
+    width: 300px;
+    margin: 10px;
+    /* background-color: rgba(255, 255, 255, 0.42); */
+    display: flex;
+    justify-content: center;
+}
+
+
+.scroll-to-top {
+    text-align: center;
+    height: auto;
+}
+
+audio {
+    position: fixed;
+    bottom: 10px; 
+    right: 10px; 
+}
+audio {
+    width: 12%;
+}
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    color: white;
+    font-weight: bold;
+}
+
+
+label[for="characterInput"] {
+    display: block;
+    margin-bottom: 10px; 
+}
+button {
+    width: 40px; 
+    height: 27px; 
+}
+
+p {
+    font-weight: bold;
+    color: white;
+}
+
+
+/* MES AJOUTS */
+ul {
+	display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    flex: 1;
+	margin: 8px;
+}
+
+.chart-container {
+    width: 50%;
+    margin: 20;
+}
+
+
+
+/* #myChart {
+
+} */
+
+/* .container {
+    width: 300px;
+    height: 300px;
+    border: 1px black solid;
+}
+
+.centered-element{
+    margin-left: auto;
+    margin-right: auto;
+    background-color: grey;
+    padding: 15px;
+    width: 120px;
+} */
+
