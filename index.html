@@ -3,75 +3,78 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>projet dataviz</title>
+    <title>Projet Dataviz & API</title>
     <link rel="stylesheet" href="style.css">
-     <!-- Icone de l'onglet : ajout logo HP  -->
-     <link rel="shortcut icon" href="logo-hp.png"> 
+    <!-- Icone de l'onglet : ajout logo HP  -->
+    <link rel="shortcut icon" href="logo-hp.png"> 
 </head>
 <body>
     <header id="top">
-        <h1>PERSONNAGES HARRY POTTER</h1>
+        <h1>Personnages de l'Univers<br>HARRY POTTER</h1>
     </header>
 
     <main>
-        <div class="flexbox1">
-            <ul>
-                <li><!-- BARRE DE RECHERCHE -->
-                    <form>
-                        <!-- <div> -->
-                            <label for="characterInput"></label>
-                            <input type="text" id="characterInput" placeholder="Entrez le nom du personnage">
-                            <!-- <button onclick="request()">:loupe_droite:</button> -->
-                            <button id ="recherche">🔎</button>
-                        <!-- </div> -->
-                    </form></li>
-                <li>
-                     <!-- FICHES PERSONNAGES -->
-            <div class="fichePersonnage">
+        <!-- CSS Flexbox / Boîte n°1 -->
+        <!-- RECHERCHE PAR NOM -->
+        <div class="flexboxRecherche">  
+
+            <!-- BARRE DE RECHERCHE -->
+            <div class="barreRecherche">
+                <form>
+                    <label for="characterInput"></label>
+                    <input type="text" id="characterInput" placeholder="Entrez le nom du personnage">
+                    <!-- <button onclick="request()">🔎</button> -->
+                    <button id ="recherche">🔎</button>
+                </form>
+            </div> 
+
+            <!-- FICHES PERSONNAGES -->
+            <div class="fichesPersonnages">
                 <img id="image" src="" alt=""/><br>
                 <h2 id="name"></h2>
                 <p id="house"></p>
                 <p id="genre"></p>
                 <p id="espece"></p>
             </div>
-                </li>
-            </ul>
         </div>
 
+        <!-- CSS Flexbox / Boîte n°2 -->
         <!-- GRAPHIQUES -->
-        <div class="flexbox2">
-            <ul>
-                <li><canvas id="myChart"></canvas></li>
-                <li><canvas id="myChart1"></canvas></li>
-            </ul>
+        <div class="flexboxGraphs">
+            <canvas id="myChart"></canvas>
+            <canvas id="myChart1"></canvas>  
         </div>
 
-        <!-- GRID - Boite 4 -->
-        <div class="grid">
+        <!-- CSS Grid / Boîte n°3 -->
+        <!-- LISTE COMPLETE DES PERSONNAGES -->
+        <div class="gridList">
             <h3>Liste des personnages</h3>
             <br>
             <ul id="post-list"></ul>
-            </div>
+        </div>
 
         <!-- LECTEUR AUDIO -->
-        <section>
-            <audio controls>
-                <!-- Indiquer le chemin ou l'URL du fichier audio -->
-                <source src="musique1.mp3" type="audio/mp3">
-                Votre navigateur ne supporte pas l'élément audio.
-            </audio>
-        </section>
+        <audio controls>
+            <!-- Indiquer le chemin ou l'URL du fichier audio -->
+            <source src="musique1.mp3" type="audio/mp3">
+            Votre navigateur ne supporte pas l'élément audio.
+        </audio>
+        
+        <!-- BOUTON RETOUR VERS LE HAUT -->
+        <div class="scroll-to-top">
+            <a href="#top"><img src="icons8-scroll-up-50.png" alt="Flèche retour vers le haut de la page" /></a>
+        </div>
     </main>
    
     <footer>
-        <!-- BOUTON RETOUR VERS LE HAUT -->
-        <div class="scroll-to-top">
-            <a href="#top"><img src="icons8-scroll-up-50.png" alt="Retourner en haut" /></a>
-        </div>
+        <h4>Projet collectif Dataviz & API</h4>
+        <h5>Tijana - Anousith - Coralie</h5>
+        <p>Promotion Elizabeth Feinler - Paris</p>
+        <p>Ada Tech School</p>
+        <p>Nov 2023</p>
     </footer>
     
-   
-   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

@@ -1,3 +1,5 @@
+// API 1 - Barre de recherche + Affichage fiches personnages
+
 const request = (e)=>{
     const image = document.getElementById("image");
     const name = document.getElementById("name")
@@ -32,8 +34,8 @@ searchCharacter.addEventListener("keypress" || "click", function(event){
 }) */
 
 
-//////////////////
 
+// API 2 - Graphiques + Liste noms des personnages
 
 const request2 = async () => {
     function premierGraph()
