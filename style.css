@@ -86,7 +86,7 @@ button:hover {
 } 
 
 .fichesPersonnages img {
-    width: 85%;
+    max-height: 300px;
     margin: 5px 0 10px 12px;
     border-radius: 10px;
 }
