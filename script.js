@@ -1,41 +1,67 @@
-// API 1 - Barre de recherche + Affichage fiches personnages
+// API 1 - BARRE DE RECHERCHE + AFFICHAGE FICHES PERSONNAGES
 
-const request = (e)=>{
-    const image = document.getElementById("image");
-    const name = document.getElementById("name")
-    const house = document.getElementById("house")
-    const genre = document.getElementById("genre")
-    const espece = document.getElementById("espece")
-   const searchCharacter = document.getElementById("characterInput").value
-    const nom = searchCharacter.replaceAll(' ','-')
-    const nomMin = nom.toLowerCase()
-    fetch(`https://api.potterdb.com/v1/characters/${nomMin}`)
-    .then((response)=>response.json())
-    .then((data)=>{
-        image.src =`${data.data.attributes.image}`;
-        image.alt =`${data.data.attributes.name}`;
-      name.textContent =`${data.data.attributes.name}`;
-      house.textContent =`${data.data.attributes.house}`;
-      genre.textContent =`${data.data.attributes.gender}`;
-      espece.textContent =`${data.data.attributes.species}`;
-}).catch((err)=>{
-    alert("Ce personnage n'existe pas",err)}
-);
-e.preventDefault();
-}
-const recherche = document.getElementById("recherche");
-recherche.addEventListener("click", request)
+const request1 = () => {
 
-/*
-searchCharacter.addEventListener("keypress" || "click", function(event){
-    if(event.key === "Enter"){
-        request()
-    }
-}) */
+    // Récupération de la valeur de l'input de recherche
+    const searchCharacter = document.getElementById("characterInput").value;
+            
+    // Modification de l'input pour correspondre à l'API (structure URL attendue) => exemple : 'Harry Potter' deviendra 'harry-potter'
+    // a. Remplacer l'espace ' ' (saisi par l'utilisateur) par un tiret '-'
+    const nom = searchCharacter.replaceAll(' ','-');
+    // b. Convertir en minuscules
+    const nomMin = nom.toLowerCase();
+
+    // Requête fetch avec la syntaxe .then()
+    const fetchPromise = fetch(`https://api.potterdb.com/v1/characters/${nomMin}`);
+
+    fetchPromise
+        .then((response) => {
+            // Vérification de la réussite de la requête
+            if (!response.ok) {
+                throw new Error(`Erreur HTTP : ${response.status}`);
+            }
+            // Conversion de la réponse en JSON
+            return response.json();
+        })
+
+        .then((json) => {
+            // Récupération des éléments du DOM (Fiches Personnages)
+            const image = document.getElementById("image");
+            const name = document.getElementById("name");
+            const house = document.getElementById("house");
+            const gender = document.getElementById("gender");
+            const species = document.getElementById("species");
+
+            // Mise à jour des éléments du DOM avec les données récupérées depuis l'API
+            image.src = json.data.attributes.image;
+            image.alt =`Photo du personnage ${json.data.attributes.name}`;
+            name.textContent = json.data.attributes.name;
+            house.textContent =`House : ${json.data.attributes.house}`;
+            gender.textContent =`Gender : ${json.data.attributes.gender}`;
+            species.textContent =`Species : ${json.data.attributes.species}`;
+        })     
+      
+        .catch((err) => {
+            // Gestion des erreurs => Affichage d'un message d'erreur
+            alert("Ce personnage n'existe pas", err);
+        });
+    
+};
+
+// Récupération de l'élément HTML formulaire de recherche
+const searchForm = document.getElementById("searchForm");
+
+// Ajout d'un Gestionnaire d'évènement 'submit'
+// => cet évènement est déclenché lorsque l'utilisateur clique sur le bouton de 'Recherche' ou appuie sur la touche 'Entrée' dans le champ de saisie du formulaire
+searchForm.addEventListener("submit", (event) => {
+    event.preventDefault();  // empêche le comportement par défaut du formulaire => permet de récupérer les données sans les envoyer à un autre emplacement, ni recharger la page 
+    request1();
+});
 
 
+// _____________________________________________________
 
-// API 2 - Graphiques + Liste noms des personnages
+// API 2 - GRAPHIQUES + LISTE NOMS DES PERSONNAGES
 
 const request2 = async () => {
     function premierGraph()

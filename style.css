@@ -37,11 +37,6 @@ h1 {
 
 /* BARRE DE RECHERCHE */
 
-label[for="characterInput"] {
-    display: block;
-    margin-bottom: 10px; 
-}
-
 #characterInput {
     margin: 15px;
     padding: 10px;
@@ -86,8 +81,9 @@ button:hover {
 } 
 
 .fichesPersonnages img {
+    display: block;
     max-height: 300px;
-    margin: 5px 0 10px 12px;
+    margin: 5px auto 10px auto;
     border-radius: 10px;
 }
 
