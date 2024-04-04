@@ -1,4 +1,4 @@
-// API 1 - BARRE DE RECHERCHE + AFFICHAGE FICHES PERSONNAGES
+// *** API 1 - BARRE DE RECHERCHE + AFFICHAGE FICHES PERSONNAGES ***
 
 const request1 = () => {
 
@@ -11,7 +11,7 @@ const request1 = () => {
     // b. Convertir en minuscules
     const nomMin = nom.toLowerCase();
 
-    // Requête fetch avec la syntaxe .then()
+    // Requête fetch avec la méthode .then()
     const fetchPromise = fetch(`https://api.potterdb.com/v1/characters/${nomMin}`);
 
     fetchPromise
@@ -59,42 +59,55 @@ searchForm.addEventListener("submit", (event) => {
 });
 
 
-// _____________________________________________________
+// ______________________________________________________
 
-// API 2 - GRAPHIQUES + LISTE NOMS DES PERSONNAGES
+
+// *** API 2 - GRAPHIQUES + LISTE NOMS DES PERSONNAGES ***
+
+// Ici : Requête n°2 - Fetch & Gestion de l'asynchrone avec async / await
+// Création des graphiques avec la bibliothèque Chart.js
 
 const request2 = async () => {
-    function premierGraph()
-    {
-        const ctx = document.getElementById('myChart');
-        new Chart(ctx, {
-            type: 'bar',
+    
+    // *** GRAPHIQUES ***
+    
+    // Fonction pour créer le GRAPHIQUE n°1 : Nombre de personnages par maison
+    function premierGraph() {
+        // Récupération de l'élément canvas HTML avec l'ID "myChart" (ctx contexte)
+        const ctx = document.getElementById('myChart'); 
+        // Création d'un nouvel objet "Chart" (instance) en utilisant le contexte (ctx) spécifié (canvas HTML)
+        new Chart(ctx, { 
+            // Type de graphique : ici graphique en barres 
+            type: 'bar', 
+            // Définition des données à afficher sur le graphique
             data: {
+                // Labels / Etiquettes pour l'axe X (les catégories)
                 labels: ['Gryffindor', 'Slytherin', 'Ravenclaw', 'Hufflepuff'],
+                // Données à afficher sur le graphique (nombre de personnages par maison)
                 datasets: [{
-                    label: 'nombre de personnages par maison',
+                    label: 'nombre de personnages par maison', 
                     data: listCharactersByHouses,
-                    borderWidth: 1             
+                    borderWidth: 1           
                 }]
             },
             options: {
                 scales: {
                     y: {
-                        beginAtZero: true
+                        beginAtZero: true // Début du graphique à 0 sur l'axe Y
                     }
                 }
             }
         });
     }
 
-    function deuxiemeGraph()
-    {
+    // Fonction pour créer le GRAPHIQUE n°2 : Répartition des personnages (masculin / féminin)
+    function deuxiemeGraph () {
         const ctx = document.getElementById('myChart1');
         new Chart(ctx, {
             type: 'bar',
             data: {
-                labels: ['male', 'female'],
-                datasets: [{
+                labels: ['male', 'female'],  // Labels / Etiquettes pour l'axe X (les catégories)
+                datasets: [{  
                     label: 'nombre de personnages masculins & féminins',
                     data: listGenderByCharatecrs,
                     borderWidth: 1
@@ -109,82 +122,108 @@ const request2 = async () => {
             }
         });
     }
-    
-    // Recupération des datas
-	const url = "https://hp-api.onrender.com/api/characters"
-	const response = await fetch(url)
-	const posts = await response.json()
 
-	// Affichage des datas
-	// 1. Récupération de l'élément UL (pour contenir mes puces)
-	const ulElement = document.getElementById("post-list")
-    // 2. Création d'un dict (dictionary : structure de données "clé-valeur") pour faire la somme des persos par maison
+    // Création d'un dict (DICTIONARY : structure de données "clé-valeur") pour compter / faire la somme des personnages par maison
     let dictHouses = {
         'Gryffindor': 0, 
         'Slytherin': 0, 
         'Ravenclaw': 0, 
         'Hufflepuff': 0
     }
-    // 3. Création d'un dict (dictionary : structure de données "clé-valeur") pour faire la somme des persos par genre
+    // Création d'un dictionnaire pour compter / faire la somme des personnages par genre
     let dictGenders = {
         'male': 0,
         'female': 0
     }
-	// 4. Pour chaque post, éxecuter le traitement suivant:
+    
+
+    // *** RECUPERATION DES DONNEES des personnages depuis l'API : ***
+
+    // URL API n°2
+	const url = "https://hp-api.onrender.com/api/characters";
+
+    // Requête HTTP GET à l'url de l'API en utilisant la fonction fetch()
+    // La fonction fetch() renvoie une promesse qui représente la réponse HTTP de la requête
+    // Utilisation du mot-clé 'await' pour attendre que la promesse soit résolue (= que la réponse de la requête soit disponible)
+    // La réponse est ensuite stockée dans la variable 'response'
+	const response = await fetch(url);
+
+    // Transformer la réponse HTTP en données au format JSON, et les stocker dans la variable 'posts'
+    // Utilisation du mot clé 'await' pour attendre que la promesse soit résolue (= que les données JSON soient disponibles)
+	const posts = await response.json();
+
+
+	// *** AFFICHAGE DES DONNEES => GRAPHIQUES + LISTE DES PERSONNAGES ***
+
+    // 1. Récupération de l'élément <UL> dans le HTML (qui contiendra les puces)
+	const ulElement = document.getElementById("characters-list");
+
+	// 2. Pour chaque personnage (post), exécuter le traitement suivant :
 	for (const post of posts) {
-		// a) Création d'un LI (d'une puce)
-		const liElement = document.createElement('li')
-		// b) Insertion du post dans la puce
-		const detailElement = document.createElement('details')
-		const summaryElement = document.createElement('summary')
-        const genderElement = document.createElement ('p')
-		const pElement = document.createElement('p')
-        const imageElement = document.createElement('img')
-		detailElement.appendChild(summaryElement)
-        detailElement.appendChild(genderElement)
-		detailElement.appendChild(pElement)
-        detailElement.appendChild(imageElement)
-		summaryElement.innerText = post.name
-        genderElement.innerText = post.gender
-		pElement.innerText = post.house
-        imageElement.src = post.image
-        //pElement.innerHTML += `<img src="${post.image}">`
-        liElement.appendChild(detailElement)
-		// c) Insertion de la puce (dans laquelle j'ai mis le post en b) dans l'élément UL
-		ulElement.appendChild(liElement)
 
-        /*ex : si l'élément 'house'=ravenclaw j'ajoute +1*/
-        if(post.house == 'Gryffindor'){
+		// *** LISTE PERSONNAGES : ***
+        // a) Création d'un élément <LI> (puce)
+		const liElement = document.createElement('li'); 
+        // b) Création des sous-éléments de la puce <LI>
+		const detailElement = document.createElement('details');
+		const summaryElement = document.createElement('summary');
+        const p1Element = document.createElement ('p');
+		const p2Element = document.createElement('p');
+        const imageElement = document.createElement('img');
+        // c) Ajouter les éléments créés comme 'enfants' de 'detailElement'
+        detailElement.appendChild(summaryElement);
+        detailElement.appendChild(p1Element);
+		detailElement.appendChild(p2Element);
+        detailElement.appendChild(imageElement); 
+        // d) Insertion de detailElement (enfant) dans l'élement LI (parent)
+        liElement.appendChild(detailElement);
+        // e) Insertion de la puce LI (enfant) dans l'élement UL (parent)
+        ulElement.appendChild(liElement);
+        // f) Insertion des données souhaitées issues de l'API dans nos éléments HTML
+		summaryElement.innerText = post.name;
+        p1Element.innerText = post.gender;
+		p2Element.innerText = post.house;
+        imageElement.src = post.image;
+
+		// *** GRAPHIQUES : ***
+        // Mise à jour des dictionnaires avec le nombre de personnages par maison et par genre
+        // ex : si l'élément 'house'=ravenclaw j'ajoute +1*
+        if (post.house == 'Gryffindor') {
             dictHouses.Gryffindor++
-        }else if(post.house == 'Slytherin'){
+        } else if (post.house == 'Slytherin') {
             dictHouses.Slytherin++
-        }else if(post.house == 'Ravenclaw'){
+        } else if (post.house == 'Ravenclaw') {
             dictHouses.Ravenclaw++
-        }else if(post.house == 'Hufflepuff'){
+        } else if(post.house == 'Hufflepuff') {
             dictHouses.Hufflepuff++
-        }else{
-            console.log(post.house)// Vérifier que la maison est connue
+        } else {
+            console.log(post.house) // Vérifier que la maison est connue
         }
 
-		if(post.gender == 'male'){
+		if (post.gender == 'male') {
             dictGenders.male++
-        }else if(post.gender == 'female'){
+        } else if (post.gender == 'female') {
             dictGenders.female++
-        }else{
+        } else {
             console.log(post.gender)
-        }
-        
+        } 
 	}
+
     console.log(dictHouses) // vérifier la valeur de dictHouses
     console.log(dictGenders)
 
+    // Création des listes de données pour les graphiques
     let listCharactersByHouses = [dictHouses.Gryffindor, dictHouses.Slytherin, dictHouses.Ravenclaw, dictHouses.Hufflepuff]
     console.log(listCharactersByHouses) // Variable contenant la liste du # de perso/maison(voir le résultat du console.log dans la page web)
-
-    premierGraph()
+    
+    // Affichage du 1er Graphique :
+    premierGraph() 
 
     let listGenderByCharatecrs = [dictGenders.male,dictGenders.female]
     console.log(listGenderByCharatecrs)
+
+    // Affichage du 2ème Graphique :
     deuxiemeGraph()
 }
-request2()
+
+request2();
